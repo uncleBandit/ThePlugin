@@ -37,6 +37,6 @@ Gem::Specification.new do |s|
   # Development dependencies: Gems needed only for developing/testing your plugin
   s.add_development_dependency "bundler", "~> 2.5" # The Bundler version you are using
   s.add_development_dependency "rake", "~> 13.0"
-  s.add_development_dependency "rspec-rails", "~> 6.1" # Common testing framework
+  s.add_development_dependency "rspec-rails", " 8.0.0" # Common testing framework
   s.add_development_dependency "rubocop", "~> 1.63" # Code style linter
 end
