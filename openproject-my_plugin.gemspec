@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
   s.license     = "GPL-3.0-only" # e.g. "MIT" or "GPLv3"
 
   s.files = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/}) || f.match(%r{^(.github|tmp|vendor)/})
+    f.match(%r{^(test|spec|features)/}) || f.match(%r{^(.github|tmp|vendor)/}) || f.match(/\.gem$/)
   end 
-
+  s.required_ruby_version = "~> 3.0"
 # Specify the directory where executables are located (if you have any)
   s.bindir        = "exe"
   # List the executables to be installed
@@ -28,8 +28,8 @@ Gem::Specification.new do |s|
 
   # Runtime dependencies: Gems your plugin needs to function
   # IMPORTANT: Adjust '~> VERSION' based on your OpenProject version and its Rails/OpenProject-Plugins dependencies.
-  s.add_dependency "openproject-plugins", "~> 13.0" # Essential for many OpenProject plugins. Check your OpenProject version's compatibility.
-  s.add_dependency "rails", "~> 6.1" # The Rails version compatible with your OpenProject installation.
+  #s.add_dependency "openproject-plugins", "~> 13.0" # Essential for many OpenProject plugins. Check your OpenProject version's compatibility.
+  s.add_dependency "rails",  ">= 8.0.0", "< 9.0" # The Rails version compatible with your OpenProject installation.
   # Add any other gems your plugin requires, e.g.:
   # s.add_dependency "chartkick", "~> 4.0"
   # s.add_dependency "groupdate", "~> 6.0"
