@@ -1,0 +1,44 @@
+<%# openproject-my_plugin/app/views/open_project/my_plugin/timesheet_entries/_form.html.erb %>
+
+<%= form_with(model: [@timesheet_entry], url: @timesheet_entry.new_record? ? openproject_my_plugin.timesheet_entries_path : openproject_my_plugin.timesheet_entry_path(@timesheet_entry)) do |form| %>
+  <% if @timesheet_entry.errors.any? %>
+    <div id="error_explanation" class="form--errors">
+      <h2><%= pluralize(@timesheet_entry.errors.count, "error") %> prohibited this timesheet entry from being saved:</h2>
+      <ul>
+        <% @timesheet_entry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form--field">
+    <%= form.label :project_id, "Project" %>
+    <%= form.collection_select :project_id, Project.order(:name), :id, :name, { prompt: "Select a Project" }, class: "form--select" %>
+  </div>
+
+  <div class="form--field">
+    <%= form.label :work_package_id, "Work Package" %>
+    <%= form.collection_select :work_package_id, WorkPackage.order(:subject), :id, :subject, { prompt: "Select a Work Package (Optional)" }, class: "form--select" %>
+  </div>
+
+  <div class="form--field">
+    <%= form.label :date, "Date" %>
+    <%= form.date_field :date, class: "form--text-field" %>
+  </div>
+
+  <div class="form--field">
+    <%= form.label :duration_hours, "Duration (hours)" %>
+    <%= form.number_field :duration_hours, step: :any, class: "form--text-field" %>
+  </div>
+
+  <div class="form--field">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, class: "form--text-field" %>
+  </div>
+
+  <div class="form--actions">
+    <%= form.submit class: "button -highlight" %>
+    <%= link_to "Cancel", openproject_my_plugin.timesheet_entries_path, class: "button" %>
+  </div>
+<% end %>

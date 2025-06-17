@@ -1,0 +1,39 @@
+<h1>OpenProject::MyPlugin::TimesheetEntries#index</h1>
+<p>Find me in app/views/open_project/my_plugin/timesheet_entries/index.html.erb</p>
+<%# openproject-my_plugin/app/views/open_project/my_plugin/timesheet_entries/index.html.erb %>
+
+<h1>My Timesheet Entries</h1>
+
+<%= link_to "Log New Entry", openproject_my_plugin.new_timesheet_entry_path, class: "button -highlight" %>
+
+<% if @timesheet_entries.any? %>
+  <table class="op-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Project</th>
+        <th>Work Package</th>
+        <th>Duration (hours)</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timesheet_entries.each do |entry| %>
+        <tr>
+          <td><%= l(entry.date) %></td>
+          <td><%= link_to entry.project.name, project_path(entry.project) %></td>
+          <td><%= link_to_work_package(entry.work_package) if entry.work_package %></td>
+          <td><%= entry.duration_hours %></td>
+          <td><%= entry.description %></td>
+          <td>
+            <%= link_to "Edit", openproject_my_plugin.edit_timesheet_entry_path(entry) %> |
+            <%= link_to "Delete", openproject_my_plugin.timesheet_entry_path(entry), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No timesheet entries found.</p>
+<% end %>
